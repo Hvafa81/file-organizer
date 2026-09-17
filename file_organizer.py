@@ -1,54 +1,53 @@
 from pathlib import Path
 import shutil
 
-PathDownloads = Path.home() / "Downloads"
-PathImages = PathDownloads / "Images" 
-PathDocuments = PathDownloads / "Documents" 
-PathVideos = PathDownloads / "Videos" 
-PathMusic = PathDownloads / "Music" 
-PathApplication = PathDownloads / "Application"
-PathFile = PathDownloads / "Other Files"
 
-PathImages.mkdir(exist_ok=True)
-PathDocuments.mkdir(exist_ok=True)
-PathVideos.mkdir(exist_ok=True)
-PathMusic.mkdir(exist_ok=True)
-PathApplication.mkdir(exist_ok=True)
-PathFile.mkdir(exist_ok=True)
+downloads_path = Path.home() / "Downloads"
+images_path = downloads_path / "Images"
+documents_path = downloads_path / "Documents"
+videos_path = downloads_path / "Videos"
+music_path = downloads_path / "Music"
+application_path = downloads_path / "Application"
+other_files_path = downloads_path / "Other Files"
 
-
-imagesSuffix = [".png" , ".jpg" , ".jpeg" , ".gif" ,".webp" , ".heic" ]
-documentsSuffix = [".doc" , ".xlsx",".docx" ,".pptx", ".odt" , ".txt" , ".pdf"]
-videosSuffix = [".mp4", ".mov",".avi",".mkv",".wmv" , ".flv" , ".webm"]
-musicSuffix = [".mp3", ".wav" , ".flac"]
-applicationSuffix = [".exe" ,".apk"]
+images_path.mkdir(exist_ok=True)
+documents_path.mkdir(exist_ok=True)
+videos_path.mkdir(exist_ok=True)
+music_path.mkdir(exist_ok=True)
+application_path.mkdir(exist_ok=True)
+other_files_path.mkdir(exist_ok=True)
 
 
-for item in PathDownloads.iterdir():
+image_suffixes = [".png", ".jpg", ".jpeg", ".gif", ".webp", ".heic"]
+document_suffixes = [".doc", ".xlsx", ".docx", ".pptx", ".odt", ".txt", ".pdf"]
+video_suffixes = [".mp4", ".mov", ".avi", ".mkv", ".wmv", ".flv", ".webm"]
+music_suffixes = [".mp3", ".wav", ".flac"]
+application_suffixes = [".exe", ".apk"]
 
-    print("Name :" +item.name)
-    print("Suffix :" +item.suffix)
-    print("Stem :"+item.stem)
+
+for item in downloads_path.iterdir():
+
+    print("Name :" + item.name)
+    print("Suffix :" + item.suffix)
+    print("Stem :" + item.stem)
+
     if item.is_file():
-          print("this is file")
-    elif item.is_dir(): 
+        print("this is file")
+    elif item.is_dir():
         print("directory")
+
     print("_______________________________________________________________")
-    
+
     if item.is_file():
-        if item.suffix in imagesSuffix:
-            shutil.move(item , PathImages)
-        elif item.suffix in documentsSuffix:
-            shutil.move(item , PathDocuments)
-        elif item.suffix in videosSuffix:
-            shutil.move(item ,PathVideos)
-        elif item.suffix in musicSuffix:
-            shutil.move(item , PathMusic)
-        elif item.suffix in applicationSuffix:
-            shutil.move(item , PathApplication)
-        else :
-            shutil.move(item , PathFile)
-
-   
-
-
+        if item.suffix in image_suffixes:
+            shutil.move(item, images_path)
+        elif item.suffix in document_suffixes:
+            shutil.move(item, documents_path)
+        elif item.suffix in video_suffixes:
+            shutil.move(item, videos_path)
+        elif item.suffix in music_suffixes:
+            shutil.move(item, music_path)
+        elif item.suffix in application_suffixes:
+            shutil.move(item, application_path)
+        else:
+            shutil.move(item, other_files_path)
